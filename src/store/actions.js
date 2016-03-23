@@ -45,7 +45,7 @@ export const selectLang = createAction('SELECT_LANG', (lang) => lang)
 // ===================================================================
 
 const xo = new Xo({
-  url: 'localhost:9000'
+  url: 'localhost:8080'
 })
 
 export const connected = createAction('CONNECTED')
@@ -69,6 +69,8 @@ export const signIn = createAction('SIGN_IN', (credentials) => (dispatch) => {
     }
   })
 })
+
+export const click = createAction('CLICK')
 
 export const connect = createAction('CONNECT', () => (dispatch) => {
   const connect = () => {

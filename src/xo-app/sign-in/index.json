@@ -1,0 +1,14 @@
+[
+  {
+    "id": "usernameLabel",
+    "defaultMessage": "Username"
+  },
+  {
+    "id": "passwordLabel",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "signInButton",
+    "defaultMessage": "Sign in"
+  }
+]

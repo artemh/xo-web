@@ -41,6 +41,10 @@ export default {
     [actions.selectLang]: (_, lang) => lang
   }),
 
+  show: combineActionHandlers(true, {
+    [actions.click]: (show) => !show
+  }),
+
   objects: combineActionHandlers({}, {
     [actions.addObjects]: (objects, newObjects) => ({
       ...objects,
