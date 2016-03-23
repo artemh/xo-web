@@ -8,6 +8,7 @@ import { click } from '../../store/actions'
 import {
   connectStore
 } from 'utils'
+import ActionBar from 'action-bar'
 
 @connectStore([
   'show'
@@ -34,9 +35,11 @@ export default class extends Component {
     const {
       show
     } = this.props
-    // const {
-    //   myVar
-    // } = this.state
+    const {
+      myVar,
+      mavariable,
+      showPanel
+    } = this.state
     return <div>
       <h1>{_('aboutPage')}</h1>
 
@@ -45,28 +48,37 @@ export default class extends Component {
       <div> {show ? 'TRUE' : 'FALSE'} </div>
 
       <button onClick={() => this.myFunction()}>CLICK ME</button>
-      <div>myVar = {this.state.myVar}</div>
+      <div>myVar = {myVar}</div>
       <div>Ma variable = {this.mavariable}</div>
 
       <button onClick={() => this.toggle()}>TOGGLE</button>
       <div> {
-        <MyCard toto='!' position={this.state.showPanel ? 'left' : 'right'}>
+        <MyCard toto='!' position={showPanel ? 'left' : 'right'}>
           <span>Hello</span>
         </ MyCard>
       } </div>
+
+      <div>
+        <ActionBar
+          actions={[
+            {label: 'stopVmLabel', handler: () => console.log('it works')},
+            {label: 'usernameLabel', handler: () => console.log('it works2')}
+          ]}
+        />
+      </div>
 
 
     </div>
   }
 }
 
-const MyCard = (props) => (
-  <div className={`card pull-${props.position}`} style={{width: '20%'}}>
+const MyCard = ({position, toto, children}) => (
+  <div className={`card pull-${position}`} style={{width: '20%'}}>
     <img className='card-img-top' src='http://img.linuxfr.org/img/68747470733a2f2f78656e2d6f72636865737472612e636f6d2f6173736574732f6c6f676f5f6269672e706e67/logo_big.png' alt='Card image cap'></img>
     <div className='card-block'>
-      <h4 className='card-title'>Card title {props.toto}</h4>
+      <h4 className='card-title'>Card title {toto}</h4>
       <p className='card-text'>Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-      <a className='btn btn-primary'>Button {props.children}</a>
+      <a className='btn btn-primary'>Button {children}</a>
     </div>
   </div>
 )
