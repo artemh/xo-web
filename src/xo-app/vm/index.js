@@ -1,6 +1,5 @@
-// import _ from 'messages'
-import ActionBar from 'action-bar'
-import React, { Component } from 'react'
+// import _ from 'messages'isRequired
+import React, { Component, PropTypes } from 'react'
 import { connectStore } from 'utils'
 
 // ===================================================================
@@ -48,23 +47,18 @@ const VmActionBar = ({
   }
 })
 export default class extends Component {
+  static propTypes = {
+    vm: PropTypes.object
+  };
+
   render () {
-    const {
-      container,
-      pool,
-      vm
-    } = this.props
-    console.log(this.props)
-
+    const { vm } = this.props
     if (!vm) {
-      return <h1>Loading…</h1>
+      return <h1>Loading...</h1>
     }
-
     return <div>
       <h1>{vm.name_label}</h1>
-      <p>{pool.name_label} > {container.name_label}</p>
-
-      <VmActionBar vm={vm} handlers={this.props} />
+      <p>{vm.name_description}</p>
     </div>
   }
 }
