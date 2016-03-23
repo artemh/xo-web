@@ -70,7 +70,7 @@ export const signIn = createAction('SIGN_IN', (credentials) => (dispatch) => {
   })
 })
 
-export const click = createAction('CLICK')
+export const click = createAction('CLICK', (show) => show)
 
 export const connect = createAction('CONNECT', () => (dispatch) => {
   const connect = () => {

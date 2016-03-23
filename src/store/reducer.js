@@ -42,7 +42,13 @@ export default {
   }),
 
   show: combineActionHandlers(true, {
-    [actions.click]: (show) => !show
+    [actions.click]: (show, newShow) => {
+      if (newShow != undefined) {
+        return newShow
+      } else {
+        return !show
+      }
+    }
   }),
 
   objects: combineActionHandlers({}, {
