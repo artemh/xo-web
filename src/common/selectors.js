@@ -178,6 +178,14 @@ const _objects = _createCollectionWrapper(create(
 ))
 export { _objects as objects }
 
+const _hosts = createFilter(
+  _objects,
+  (object) => object.type === 'host'
+)
+const _userSrs = createFilter(
+  _objects,
+  (object) => object.type === 'SR' && object.content_type === 'user'
+)
 const _vms = createFilter(
   _objects,
   (object) => object.type === 'VM'
@@ -230,21 +238,26 @@ export const tasks = createSort(
   createFilter(_objects, (object) => object.type === 'task')
 )
 
-export const vmContainers = _createCollectionWrapper(
-  create(
-    _objects,
-    _vms,
-    (objects, vms) => {
-      const containers = {}
-      forEach(vms, (vm) => {
-        const id = vm.$container
-        if (!containers[id]) {
-          containers[id] = objects[id]
-        }
-      })
-      return containers
-    }
+const _createObjectContainers = (set, container = '$container') =>
+  _createCollectionWrapper(
+    create(
+      _objects,
+      set,
+      (objects, set) => {
+        const containers = {}
+        forEach(set, (o) => {
+          const id = o[container]
+          if (!containers[id]) {
+            containers[id] = objects[id]
+          }
+        })
+        return containers
+      }
+    )
   )
-)
+
+export const hostContainers = _createObjectContainers(_hosts, '$poolId')
+export const userSrsContainers = _createObjectContainers(_userSrs)
+export const vmContainers = _createObjectContainers(_vms)
 
 export const vms = createSort(_vms)

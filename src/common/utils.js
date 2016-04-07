@@ -91,9 +91,11 @@ const _normalizeMapStateToProps = (mapper) => {
   return (state, props) => mapValues(mapper, (fn) => fn(state, props))
 }
 
-export const connectStore = (mapStateToProps) => connect(
+export const connectStore = (mapStateToProps, opts) => connect(
   _normalizeMapStateToProps(mapStateToProps),
-  actions
+  actions,
+  undefined,
+  opts
 )
 
 // -------------------------------------------------------------------
