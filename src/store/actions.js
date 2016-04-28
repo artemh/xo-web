@@ -40,6 +40,10 @@ const createAction = (() => {
 
 // ===================================================================
 
+export const updaterDidToto = createAction('UPDATER_DID_TOTO', (payload) => payload)
+
+// ===================================================================
+
 export const selectLang = createAction('SELECT_LANG', (lang) => lang)
 
 // ===================================================================

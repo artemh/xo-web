@@ -101,5 +101,9 @@ export default {
   status: combineActionHandlers('disconnected', {
     [actions.connected]: () => 'connected',
     [actions.disconnected]: () => 'disconnected'
+  }),
+
+  xoaStatus: combineActionHandlers('disconnected', {
+    [actions.updaterDidToto]: () => 'toto'
   })
 }

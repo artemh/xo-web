@@ -20,6 +20,7 @@ import Dashboard from './dashboard'
 import Menu from './menu'
 import Navbar from './navbar'
 import Settings from './settings'
+import XoaUpdates from './xoa-updates'
 
 @routes('home', {
   about: About,
@@ -27,7 +28,8 @@ import Settings from './settings'
   home: Home,
   'hosts/:id': Host,
   settings: Settings,
-  'vms/:id': Vm
+  'vms/:id': Vm,
+  'xoa-update': XoaUpdates
 })
 @connectStore([
   'user'

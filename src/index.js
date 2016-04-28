@@ -1,5 +1,6 @@
 import React from 'react'
 import Router from 'react-router/lib/Router'
+import xoaUpdater from 'xoa-updater'
 import { IntlProvider } from 'messages'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
@@ -7,7 +8,7 @@ import { render } from 'react-dom'
 import DevTools from './dev-tools'
 import store, { history } from './store'
 import XoApp from './xo-app'
-import { connect } from './store/actions'
+import { connect, updaterDidToto } from './store/actions'
 
 if (
   typeof window !== 'undefined' &&
@@ -19,6 +20,10 @@ if (
 }
 
 store.dispatch(connect())
+
+xoaUpdater.on('toto', (payload) => {
+  store.dispatch(updaterDidToto(payload))
+})
 
 render(
   <Provider store={store}>
