@@ -166,6 +166,14 @@ export const messages = {
     defaultMessage: 'Auto-load at server start'
   },
 
+  savePluginConfiguration: {
+    defaultMessage: 'Save configuration'
+  },
+
+  deletePluginConfiguration: {
+    defaultMessage: 'Delete configuration'
+  },
+
   // ----- VM actions ------
   startVmLabel: {
     defaultMessage: 'Start'
@@ -887,6 +895,8 @@ localizedMessages.fr = {
   fillRequiredInformations: 'Remplir les champs requis.',
   fillOptionalInformations: 'Remplir informations (optionnel)',
   autoloadPlugin: 'Charger auto. au démarrage du serveur',
+  savePluginConfiguration: 'Sauvegarder configuration',
+  deletePluginConfiguration: 'Supprimer configuration',
   startVmLabel: 'Démarrer',
   recoveryModeLabel: 'Démarrer en mode sans échec',
   suspendVmLabel: 'Suspendre',

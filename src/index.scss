@@ -449,6 +449,10 @@ select:required {
     @extend .fa;
     @extend .fa-trash;
   }
+  &-save {
+    @extend .fa;
+    @extend .fa-floppy-o;
+  }
 
   &-action-row {
     font-size: 1.5em;

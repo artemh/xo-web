@@ -22,6 +22,17 @@ class Plugin extends Component {
     })
   }
 
+  @autobind
+  setAutoload (event) {
+    console.log(event.target.checked)
+    // TODO
+  }
+
+  @autobind
+  deleteConfiguration () {
+    // TODO
+  }
+
   render () {
     const {
       props,
@@ -42,7 +53,7 @@ class Plugin extends Component {
           </span>
           <div className='checkbox small'>
             <label className='text-muted'>
-              {_('autoloadPlugin')} <input type='checkbox' />
+              {_('autoloadPlugin')} <input type='checkbox' checked={props.autoload} onChange={this.setAutoload} />
             </label>
           </div>
           <div className='form-group pull-right small'>
@@ -51,13 +62,27 @@ class Plugin extends Component {
             </button>
           </div>
         </h4>
-        {expanded &&
+        {expanded && [
           <GenericInput
             label='Configuration'
             schema={props.configurationSchema}
             required
-          />
-        }
+          />,
+          <div className='form-group pull-xs-right'>
+            <div className='btn-toolbar'>
+              <div className='btn-group'>
+                <button type='submit' className='btn btn-primary'>
+                  {_('savePluginConfiguration')} <Icon icon='save' />
+                </button>
+              </div>
+              <div className='btn-group'>
+                <button className='btn btn-danger' onClick={this.deleteConfiguration}>
+                  {_('deletePluginConfiguration')} <Icon icon='delete' />
+                </button>
+              </div>
+            </div>
+          </div>
+        ]}
       </div>
     )
   }
