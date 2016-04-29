@@ -160,6 +160,12 @@ export const messages = {
     defaultMessage: 'Fill informations (optional)'
   },
 
+  // ----- Plugins ------
+
+  autoloadPlugin: {
+    defaultMessage: 'Auto-load at server start'
+  },
+
   // ----- VM actions ------
   startVmLabel: {
     defaultMessage: 'Start'
@@ -880,6 +886,7 @@ localizedMessages.fr = {
   selectVms: 'Selectionner VM(s)...',
   fillRequiredInformations: 'Remplir les champs requis.',
   fillOptionalInformations: 'Remplir informations (optionnel)',
+  autoloadPlugin: 'Charger auto. au démarrage du serveur',
   startVmLabel: 'Démarrer',
   recoveryModeLabel: 'Démarrer en mode sans échec',
   suspendVmLabel: 'Suspendre',

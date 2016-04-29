@@ -260,6 +260,16 @@ select:required {
     @extend .fa-toggle-off;
   }
 
+  &-plus {
+    @extend .fa;
+    @extend .fa-plus;
+  }
+
+  &-minus {
+    @extend .fa;
+    @extend .fa-minus;
+  }
+
   &-host-running {
     @extend .fa;
     @extend .fa-server;
