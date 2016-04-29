@@ -67,3 +67,58 @@ export class Password extends Component {
     </div>
   }
 }
+
+// ===================================================================
+
+export class Toggle extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      checked: Boolean(props.value)
+    }
+  }
+
+  get value () {
+    return this.refs.input.checked
+  }
+
+  set value (checked) {
+    checked = Boolean(checked)
+
+    this.setState({
+      checked
+    }, () => { this.refs.input.checked = Boolean(checked) })
+  }
+
+  @autobind
+  _onChange (checked) {
+    const { onChange } = this.props
+
+    this.setState({
+      checked
+    })
+
+    if (onChange) {
+      onChange(checked)
+    }
+  }
+
+  render () {
+    const { checked } = this.state
+
+    return (
+      <div className='checkbox'>
+        <label>
+          <Icon icon={`toggle-${!checked ? 'off' : 'on'}`} />
+          <input
+            defaultChecked={checked || false}
+            onChange={(event) => { this._onChange(event.target.checked) }}
+            ref='input'
+            style={{ visibility: 'hidden' }}
+            type='checkbox'
+          />
+        </label>
+      </div>
+    )
+  }
+}

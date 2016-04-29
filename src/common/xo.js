@@ -56,6 +56,8 @@ const createSubscription = (name, cb) => {
 
 createSubscription('permissions', () => xo.call('acl.getCurrentPermissions'))
 
+createSubscription('plugins', () => xo.call('plugin.get'))
+
 createSubscription('servers', invoke(
   sortBy('host'),
   (sort) => () => xo.call('server.getAll').then(sort)
