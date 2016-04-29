@@ -1,42 +1,63 @@
-import _ from 'messages'
-import React, { Component } from 'react'
 import GenericInput from 'json-schema-input'
-import map from 'lodash/map'
 import Icon from 'icon'
+import React, { Component } from 'react'
+import _ from 'messages'
+import map from 'lodash/map'
 import { Toggle } from 'form'
+import { autobind } from 'utils'
 import { subscribe } from 'xo'
 
 class Plugin extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      expanded: false
+    }
+  }
+
+  @autobind
+  updateExpanded () {
+    this.setState({
+      expanded: !this.state.expanded
+    })
+  }
+
   render () {
-    const { props } = this
+    const {
+      props,
+      state: {
+        expanded
+      }
+    } = this
 
     return (
       <div className='card-block'>
         <h4 className='form-inline clearfix'>
           <Toggle />
-          <span className='text-info'>
+          <span className='text-primary'>
             {`${props.name} `}
           </span>
           <span>
             {`(v${props.version}) `}
           </span>
           <div className='checkbox small'>
-            <label>
+            <label className='text-muted'>
               {_('autoloadPlugin')} <input type='checkbox' />
             </label>
           </div>
           <div className='form-group pull-right small'>
-            <button type='button' className='btn btn-primary'>
-              <Icon icon='plus' />
+            <button type='button' className='btn btn-primary' onClick={this.updateExpanded}>
+              <Icon icon={expanded ? 'minus' : 'plus'} />
             </button>
           </div>
         </h4>
-        <GenericInput
-          label='Configuration'
-          schema={props.configurationSchema}
-          required
-           />
-        <hr />
+        {expanded &&
+          <GenericInput
+            label='Configuration'
+            schema={props.configurationSchema}
+            required
+          />
+        }
       </div>
     )
   }
@@ -61,9 +82,13 @@ export default class Plugins extends Component {
           <Icon icon='menu-settings-plugins' />
           <span>Plugins</span>
         </h2>
-        <div className='card card-block'>
-          {map(this.state.plugins, (plugin) => <Plugin {...plugin} />)}
-        </div>
+        <ul style={{'paddingLeft': 0}} >
+          {map(this.state.plugins, (plugin) =>
+            <li className='list-group-item clearfix'>
+              <Plugin {...plugin} />
+            </li>
+          )}
+        </ul>
       </div>
     )
   }
