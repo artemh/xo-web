@@ -5,20 +5,6 @@ import map from 'lodash/map'
 import { Toggle } from 'form'
 import { subscribe } from 'xo'
 
-
-/*
-
-          .checkbox.small
-            label
-              | Auto-load at server start&nbsp;
-              input(type = 'checkbox', ng-model = 'plugin._autoload', ng-change = 'ctrl.toggleAutoload(plugin)', ng-disabled = 'ctrl.disabled[plugin.id]')
-          .form-group.pull-right.small
-              button.btn.btn-default(type = 'button', ng-click = 'isExpanded = !isExpanded'): i.fa(ng-class = '{"fa-plus": !isExpanded, "fa-minus": isExpanded}')
-        hr
-
-*/
-
-
 class Plugin extends Component {
   render () {
     const { props } = this
@@ -41,7 +27,7 @@ class Plugin extends Component {
           </div>
         </h3>
         <GenericInput
-          label={`Configuration`}
+          label='Configuration'
           schema={props.configurationSchema}
           required
         />
