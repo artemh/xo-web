@@ -3,7 +3,7 @@ import { routes } from 'utils'
 import Overview from './overview'
 import Health from './health'
 
-const Dashboard = routes('overview', {
+const Dashboard = routes('health', {
   health: Health,
   overview: Overview
 })(

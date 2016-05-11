@@ -125,9 +125,13 @@ const createSubscription = (name, cb) => {
   }
 }
 
+createSubscription('jobs', () => xo.call('job.getAll'))
+
 createSubscription('permissions', () => xo.call('acl.getCurrentPermissions'))
 
 createSubscription('remotes', () => xo.call('remote.getAll'))
+
+createSubscription('schedules', () => xo.call('schedule.getAll'))
 
 createSubscription('servers', invoke(
   sortBy('host'),
