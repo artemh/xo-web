@@ -268,7 +268,7 @@ const _createObjectContainers = (set, container = '$container') =>
     )
   )
 
-export const hostContainers = _createObjectContainers(_hosts, '$pool')
+export { _createObjectContainers as createObjectContainers }
 export const userSrsContainers = _createObjectContainers(_userSrs)
 export const vmContainers = _createObjectContainers(_vms)
 

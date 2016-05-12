@@ -18,22 +18,6 @@ import {
 const COMMON_SCHEMA = {
   type: 'object',
   properties: {
-    tag: {
-      type: 'string',
-      title: 'Tag',
-      description: 'Back-up tag.'
-    },
-    vms: {
-      type: 'array',
-      'xo:type': 'vm',
-      title: 'VMs',
-      description: 'Choose VMs to backup.'
-    },
-    _reportWhen: {
-      enum: [ 'Never', 'Always', 'Failure' ],
-      title: 'Report',
-      description: 'When to send reports.'
-    },
     enabled: {
       type: 'boolean',
       title: 'Enable immediately after creation'
@@ -42,24 +26,10 @@ const COMMON_SCHEMA = {
   required: [ 'tag', 'vms', '_reportWhen' ]
 }
 
-const DEPTH_PROPERTY = {
-  type: 'integer',
-  title: 'Depth',
-  description: 'How many backups to rollover.'
-}
-
-const REMOTE_PROPERTY = {
-  type: 'string',
-  'xo:type': 'remote',
-  title: 'Remote'
-}
-
 const BACKUP_SCHEMA = {
   type: 'object',
   properties: {
     ...COMMON_SCHEMA.properties,
-    depth: DEPTH_PROPERTY,
-    remoteId: REMOTE_PROPERTY,
     onlyMetadata: {
       type: 'boolean',
       title: 'Only MetaData',
@@ -77,8 +47,7 @@ const BACKUP_SCHEMA = {
 const ROLLING_SNAPHOT_SCHEMA = {
   type: 'object',
   properties: {
-    ...COMMON_SCHEMA.properties,
-    depth: DEPTH_PROPERTY
+    ...COMMON_SCHEMA.properties
   },
   required: COMMON_SCHEMA.required.concat('depth')
 }
@@ -86,9 +55,7 @@ const ROLLING_SNAPHOT_SCHEMA = {
 const DELTA_BACKUP_SCHEMA = {
   type: 'object',
   properties: {
-    ...COMMON_SCHEMA.properties,
-    depth: DEPTH_PROPERTY,
-    remote: REMOTE_PROPERTY
+    ...COMMON_SCHEMA.properties
   },
   required: COMMON_SCHEMA.required.concat([ 'depth', 'remote' ])
 }
@@ -97,11 +64,15 @@ const DISASTER_RECOVERY_SCHEMA = {
   type: 'object',
   properties: {
     ...COMMON_SCHEMA.properties,
-    depth: DEPTH_PROPERTY,
     pool: {
       type: 'string',
       'xo:type': 'pool',
       title: 'To Pool'
+    },
+    remote: {
+      type: 'array',
+      'xo:type': 'remote',
+      title: 'To Remotes'
     }
   },
   required: COMMON_SCHEMA.required.concat([ 'depth', 'pool' ])
@@ -110,12 +81,7 @@ const DISASTER_RECOVERY_SCHEMA = {
 const CONTINUOUS_REPLICATION_SCHEMA = {
   type: 'object',
   properties: {
-    ...COMMON_SCHEMA.properties,
-    sr: {
-      type: 'array',
-      'xo:type': 'sr',
-      title: 'To SR'
-    }
+    ...COMMON_SCHEMA.properties
   },
   required: COMMON_SCHEMA.required.concat('sr')
 }
