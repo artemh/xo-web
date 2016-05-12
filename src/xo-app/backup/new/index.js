@@ -64,6 +64,11 @@ const DISASTER_RECOVERY_SCHEMA = {
   type: 'object',
   properties: {
     ...COMMON_SCHEMA.properties,
+    host: {
+      type: 'array',
+      'xo:type': 'host',
+      title: 'To Hosts'
+    },
     pool: {
       type: 'string',
       'xo:type': 'pool',

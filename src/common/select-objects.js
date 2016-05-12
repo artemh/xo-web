@@ -4,12 +4,13 @@ import Select from 'react-select'
 import _ from 'messages'
 import forEach from 'lodash/forEach'
 import groupBy from 'lodash/groupBy'
+import filter from 'lodash/filter'
 import map from 'lodash/map'
 import { parse } from 'xo-remote-parser'
 
 import {
   create as createSelector,
-  createObjectContainers,
+  createCollectionWrapper,
   pools
 } from 'selectors'
 import {
@@ -88,14 +89,17 @@ const injectUpdateFunction = ({ container, update }) => {
 // ===================================================================
 
 @connectStore(() => {
-  const getPools = wrapCollectionSelector(createSelector(
-    (state, props) => props.hosts,
-    objects,
-    (hosts, objects) => {
+  const getPools = createCollectionWrapper(createSelector(
+    (state, props) => props.options,
+    pools,
+    (hosts, pools) => {
       const results = {}
+
       forEach(hosts, host => {
-        results[host.$container] = objects[host.$container]
+        const id = host.$poolId
+        results[host.$poolId] = filter(pools, pool => pool.id === host.$poolId)[0]
       })
+
       return results
     }
   ))
@@ -109,22 +113,29 @@ const injectUpdateFunction = ({ container, update }) => {
 export class SelectHost extends GenericSelect {
   componentWillMount () {
     const update = options => {
+      const { props } = this
+      const hostsByPool = groupBy(props.options, '$poolId')
       let newOptions = []
 
-      forEach(props.pools, (label, value) => {
+      forEach(props.pools, pool => {
+        const poolId = pool.id
+
         newOptions.push({
-          value,
-          label,
+          value: poolId,
+          label: pool.name_label || poolId,
           disabled: true,
           type: 'pool'
         })
 
         newOptions = newOptions.concat(
-          map(props.hostsByContainer[value], host => ({
-            value: host.id,
-            label: host.name_label || host.id,
-            type: 'host'
-          }))
+          map(hostsByPool[poolId], host => {
+            const hostId = host.id
+            return {
+              value: hostId,
+              label: host.name_label || hostId,
+              type: 'host'
+            }
+          })
         )
       })
 

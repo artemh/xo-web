@@ -268,7 +268,6 @@ const _createObjectContainers = (set, container = '$container') =>
     )
   )
 
-export { _createObjectContainers as createObjectContainers }
 export const userSrsContainers = _createObjectContainers(_userSrs)
 export const vmContainers = _createObjectContainers(_vms)
 
